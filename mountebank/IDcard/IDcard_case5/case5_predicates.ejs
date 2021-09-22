@@ -1,0 +1,17 @@
+{
+    "and":[
+       {
+            "equals":{
+                "path":"/idcard/v1/checknumber",
+                "method":"POST"
+            }
+       },
+       {
+          "matches":{
+             "body":{
+                "idcard":"^[8]{1}[0-9]{12}"
+             }
+          }
+       }
+    ]
+ }

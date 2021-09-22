@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.1 (Python 3.8.2 on win32)" generated="20210922 14:40:02.937" rpa="false" schemaversion="2">
+<suite id="s1" name="CheckIDCard" source="C:\Users\dvive\Desktop\github\CheckIDCardNumber\robot\testcases\CheckIDCard.robot">
+<test id="s1-t1" name="Check IDcard case1">
+<kw name="Check ID Card Number" library="keywords">
+<arg>1110200158292</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>checkIDcardSession</arg>
+<arg>${COMMON.base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210922 14:40:03.319" level="INFO">Creating Session using : alias=checkIDcardSession, url=http://localhost:6969/idcard, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210922 14:40:03.319" endtime="20210922 14:40:03.319"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>IDcard=${IDcardnumber}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.319" level="INFO">${body} = {'IDcard': '1110200158292'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.319" endtime="20210922 14:40:03.319"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.319" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.319" endtime="20210922 14:40:03.319"/>
+</kw>
+<kw name="Post On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>checkIDcardSession</arg>
+<arg>/v1/checknumber</arg>
+<arg>json=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20210922 14:40:03.343" level="INFO">POST Request : url=http://localhost:6969/idcard/v1/checknumber 
+ path_url=/idcard/v1/checknumber 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '27'} 
+ body=b'{"IDcard": "1110200158292"}' 
+ </msg>
+<msg timestamp="20210922 14:40:03.343" level="INFO">POST Response : url=http://localhost:6969/idcard/v1/checknumber 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Wed, 22 Sep 2021 07:40:03 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "type person": "thai people/nationality thai"
+} 
+ </msg>
+<msg timestamp="20210922 14:40:03.343" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210922 14:40:03.319" endtime="20210922 14:40:03.343"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.345" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.344" endtime="20210922 14:40:03.345"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.345" level="INFO">${res_body} = {
+    "type person": "thai people/nationality thai"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.345" endtime="20210922 14:40:03.345"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${status_code}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.345" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.345" endtime="20210922 14:40:03.345"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${res_body}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.348" level="INFO">${res_body} = {
+    "type person": "thai people/nationality thai"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.345" endtime="20210922 14:40:03.348"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.318" endtime="20210922 14:40:03.348"/>
+</kw>
+<kw name="Result Should Be Success Of case1" library="keywords">
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210922 14:40:03.350" endtime="20210922 14:40:03.351"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_body}</arg>
+<arg>thai people/nationality thai</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20210922 14:40:03.351" endtime="20210922 14:40:03.351"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.349" endtime="20210922 14:40:03.353"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.317" endtime="20210922 14:40:03.353"/>
+</test>
+<test id="s1-t2" name="Check IDcard case2">
+<kw name="Check ID Card Number" library="keywords">
+<arg>3110200158292</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>checkIDcardSession</arg>
+<arg>${COMMON.base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210922 14:40:03.358" level="INFO">Creating Session using : alias=checkIDcardSession, url=http://localhost:6969/idcard, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210922 14:40:03.357" endtime="20210922 14:40:03.358"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>IDcard=${IDcardnumber}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.358" level="INFO">${body} = {'IDcard': '3110200158292'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.358" endtime="20210922 14:40:03.358"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.358" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.358" endtime="20210922 14:40:03.358"/>
+</kw>
+<kw name="Post On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>checkIDcardSession</arg>
+<arg>/v1/checknumber</arg>
+<arg>json=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20210922 14:40:03.373" level="INFO">POST Request : url=http://localhost:6969/idcard/v1/checknumber 
+ path_url=/idcard/v1/checknumber 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '27'} 
+ body=b'{"IDcard": "3110200158292"}' 
+ </msg>
+<msg timestamp="20210922 14:40:03.373" level="INFO">POST Response : url=http://localhost:6969/idcard/v1/checknumber 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Wed, 22 Sep 2021 07:40:03 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "type person": "thai people/alien"
+} 
+ </msg>
+<msg timestamp="20210922 14:40:03.373" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210922 14:40:03.358" endtime="20210922 14:40:03.373"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.375" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.374" endtime="20210922 14:40:03.375"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.375" level="INFO">${res_body} = {
+    "type person": "thai people/alien"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.375" endtime="20210922 14:40:03.375"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${status_code}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.375" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.375" endtime="20210922 14:40:03.375"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${res_body}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.375" level="INFO">${res_body} = {
+    "type person": "thai people/alien"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.375" endtime="20210922 14:40:03.375"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.356" endtime="20210922 14:40:03.375"/>
+</kw>
+<kw name="Result Should Be Success Of case2" library="keywords">
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210922 14:40:03.380" endtime="20210922 14:40:03.380"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_body}</arg>
+<arg>thai people/alien</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20210922 14:40:03.381" endtime="20210922 14:40:03.381"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.379" endtime="20210922 14:40:03.382"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.355" endtime="20210922 14:40:03.382"/>
+</test>
+<test id="s1-t3" name="Check IDcard case3">
+<kw name="Check ID Card Number" library="keywords">
+<arg>6110200158292</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>checkIDcardSession</arg>
+<arg>${COMMON.base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210922 14:40:03.388" level="INFO">Creating Session using : alias=checkIDcardSession, url=http://localhost:6969/idcard, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210922 14:40:03.386" endtime="20210922 14:40:03.388"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>IDcard=${IDcardnumber}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.389" level="INFO">${body} = {'IDcard': '6110200158292'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.388" endtime="20210922 14:40:03.389"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.390" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.390" endtime="20210922 14:40:03.390"/>
+</kw>
+<kw name="Post On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>checkIDcardSession</arg>
+<arg>/v1/checknumber</arg>
+<arg>json=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20210922 14:40:03.403" level="INFO">POST Request : url=http://localhost:6969/idcard/v1/checknumber 
+ path_url=/idcard/v1/checknumber 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '27'} 
+ body=b'{"IDcard": "6110200158292"}' 
+ </msg>
+<msg timestamp="20210922 14:40:03.403" level="INFO">POST Response : url=http://localhost:6969/idcard/v1/checknumber 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Wed, 22 Sep 2021 07:40:03 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "type person": "alien"
+} 
+ </msg>
+<msg timestamp="20210922 14:40:03.403" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210922 14:40:03.390" endtime="20210922 14:40:03.403"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.405" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.404" endtime="20210922 14:40:03.405"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.408" level="INFO">${res_body} = {
+    "type person": "alien"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.405" endtime="20210922 14:40:03.408"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${status_code}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.408" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.408" endtime="20210922 14:40:03.409"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${res_body}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.409" level="INFO">${res_body} = {
+    "type person": "alien"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.409" endtime="20210922 14:40:03.409"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.385" endtime="20210922 14:40:03.409"/>
+</kw>
+<kw name="Result Should Be Success Of case3" library="keywords">
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210922 14:40:03.411" endtime="20210922 14:40:03.411"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_body}</arg>
+<arg>alien</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20210922 14:40:03.411" endtime="20210922 14:40:03.412"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.410" endtime="20210922 14:40:03.412"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.384" endtime="20210922 14:40:03.413"/>
+</test>
+<test id="s1-t4" name="Check IDcard case4">
+<kw name="Check ID Card Number" library="keywords">
+<arg>7110200158292</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>checkIDcardSession</arg>
+<arg>${COMMON.base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210922 14:40:03.418" level="INFO">Creating Session using : alias=checkIDcardSession, url=http://localhost:6969/idcard, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210922 14:40:03.417" endtime="20210922 14:40:03.418"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>IDcard=${IDcardnumber}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.419" level="INFO">${body} = {'IDcard': '7110200158292'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.418" endtime="20210922 14:40:03.419"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.419" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.419" endtime="20210922 14:40:03.420"/>
+</kw>
+<kw name="Post On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>checkIDcardSession</arg>
+<arg>/v1/checknumber</arg>
+<arg>json=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20210922 14:40:03.432" level="INFO">POST Request : url=http://localhost:6969/idcard/v1/checknumber 
+ path_url=/idcard/v1/checknumber 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '27'} 
+ body=b'{"IDcard": "7110200158292"}' 
+ </msg>
+<msg timestamp="20210922 14:40:03.432" level="INFO">POST Response : url=http://localhost:6969/idcard/v1/checknumber 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Wed, 22 Sep 2021 07:40:03 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "type person": "child of alien person"
+} 
+ </msg>
+<msg timestamp="20210922 14:40:03.432" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210922 14:40:03.420" endtime="20210922 14:40:03.432"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.433" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.433" endtime="20210922 14:40:03.433"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.435" level="INFO">${res_body} = {
+    "type person": "child of alien person"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.433" endtime="20210922 14:40:03.435"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${status_code}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.435" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.435" endtime="20210922 14:40:03.436"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${res_body}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.436" level="INFO">${res_body} = {
+    "type person": "child of alien person"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.436" endtime="20210922 14:40:03.436"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.416" endtime="20210922 14:40:03.436"/>
+</kw>
+<kw name="Result Should Be Success Of case4" library="keywords">
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210922 14:40:03.438" endtime="20210922 14:40:03.439"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_body}</arg>
+<arg>child of alien person</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20210922 14:40:03.439" endtime="20210922 14:40:03.439"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.438" endtime="20210922 14:40:03.439"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.415" endtime="20210922 14:40:03.441"/>
+</test>
+<test id="s1-t5" name="Check IDcard case5">
+<kw name="Check ID Card Number" library="keywords">
+<arg>8110200158292</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>checkIDcardSession</arg>
+<arg>${COMMON.base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210922 14:40:03.443" level="INFO">Creating Session using : alias=checkIDcardSession, url=http://localhost:6969/idcard, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210922 14:40:03.443" endtime="20210922 14:40:03.443"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>IDcard=${IDcardnumber}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.443" level="INFO">${body} = {'IDcard': '8110200158292'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.443" endtime="20210922 14:40:03.443"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.443" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.443" endtime="20210922 14:40:03.443"/>
+</kw>
+<kw name="Post On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>checkIDcardSession</arg>
+<arg>/v1/checknumber</arg>
+<arg>json=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20210922 14:40:03.460" level="INFO">POST Request : url=http://localhost:6969/idcard/v1/checknumber 
+ path_url=/idcard/v1/checknumber 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '27'} 
+ body=b'{"IDcard": "8110200158292"}' 
+ </msg>
+<msg timestamp="20210922 14:40:03.460" level="INFO">POST Response : url=http://localhost:6969/idcard/v1/checknumber 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Wed, 22 Sep 2021 07:40:03 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "type person": "alien a thai person"
+} 
+ </msg>
+<msg timestamp="20210922 14:40:03.460" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210922 14:40:03.443" endtime="20210922 14:40:03.460"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.462" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.460" endtime="20210922 14:40:03.462"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.462" level="INFO">${res_body} = {
+    "type person": "alien a thai person"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.462" endtime="20210922 14:40:03.462"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${status_code}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.462" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.462" endtime="20210922 14:40:03.465"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${res_body}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.466" level="INFO">${res_body} = {
+    "type person": "alien a thai person"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.465" endtime="20210922 14:40:03.466"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.443" endtime="20210922 14:40:03.466"/>
+</kw>
+<kw name="Result Should Be Success Of case5" library="keywords">
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210922 14:40:03.468" endtime="20210922 14:40:03.469"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_body}</arg>
+<arg>alien a thai person</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20210922 14:40:03.469" endtime="20210922 14:40:03.470"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.467" endtime="20210922 14:40:03.470"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.443" endtime="20210922 14:40:03.471"/>
+</test>
+<test id="s1-t6" name="Check IDcard case6">
+<kw name="Check ID Card Number" library="keywords">
+<arg>0110200158292</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>checkIDcardSession</arg>
+<arg>${COMMON.base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210922 14:40:03.475" level="INFO">Creating Session using : alias=checkIDcardSession, url=http://localhost:6969/idcard, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210922 14:40:03.473" endtime="20210922 14:40:03.475"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>IDcard=${IDcardnumber}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.476" level="INFO">${body} = {'IDcard': '0110200158292'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.475" endtime="20210922 14:40:03.476"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210922 14:40:03.476" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210922 14:40:03.476" endtime="20210922 14:40:03.476"/>
+</kw>
+<kw name="Post On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>checkIDcardSession</arg>
+<arg>/v1/checknumber</arg>
+<arg>json=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20210922 14:40:03.490" level="INFO">POST Request : url=http://localhost:6969/idcard/v1/checknumber 
+ path_url=/idcard/v1/checknumber 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '27'} 
+ body=b'{"IDcard": "0110200158292"}' 
+ </msg>
+<msg timestamp="20210922 14:40:03.490" level="INFO">POST Response : url=http://localhost:6969/idcard/v1/checknumber 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Wed, 22 Sep 2021 07:40:03 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "type person": "non-registered person"
+} 
+ </msg>
+<msg timestamp="20210922 14:40:03.490" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210922 14:40:03.476" endtime="20210922 14:40:03.490"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.492" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.491" endtime="20210922 14:40:03.492"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210922 14:40:03.493" level="INFO">${res_body} = {
+    "type person": "non-registered person"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.493" endtime="20210922 14:40:03.493"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${status_code}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.493" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20210922 14:40:03.493" endtime="20210922 14:40:03.493"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${res_body}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20210922 14:40:03.493" level="INFO">${res_body} = {
+    "type person": "non-registered person"
+}</msg>
+<status status="PASS" starttime="20210922 14:40:03.493" endtime="20210922 14:40:03.493"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.473" endtime="20210922 14:40:03.493"/>
+</kw>
+<kw name="Result Should Be Success Of case6" library="keywords">
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210922 14:40:03.497" endtime="20210922 14:40:03.498"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_body}</arg>
+<arg>non-registered person</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20210922 14:40:03.498" endtime="20210922 14:40:03.499"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.497" endtime="20210922 14:40:03.499"/>
+</kw>
+<status status="PASS" starttime="20210922 14:40:03.472" endtime="20210922 14:40:03.500"/>
+</test>
+<status status="PASS" starttime="20210922 14:40:02.941" endtime="20210922 14:40:03.503"/>
+</suite>
+<statistics>
+<total>
+<stat pass="6" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="6" fail="0" skip="0" id="s1" name="CheckIDCard">CheckIDCard</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

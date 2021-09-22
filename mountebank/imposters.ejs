@@ -1,0 +1,38 @@
+{
+    "imposters": [
+            {
+                    "port": 6969,
+                    "protocol": "http",
+                    "name": "IDcard",
+                    "stubs": [
+                            {
+                                    "predicates": [ <% include IDcard/IDcard_case1/case1_predicates.ejs %> ],
+                                    "responses": [ <% include IDcard/IDcard_case1/case1_response.ejs %> ]
+                            },
+                            {
+                                    "predicates": [ <% include IDcard/IDcard_case2/case2_predicates.ejs %> ],
+                                    "responses": [ <% include IDcard/IDcard_case2/case2_response.ejs %> ]
+                            },
+                            {
+                                    "predicates": [ <% include IDcard/IDcard_case3/case3_predicates.ejs %> ],
+                                    "responses": [ <% include IDcard/IDcard_case3/case3_response.ejs %> ]
+                            },
+                            {
+                                    "predicates": [ <% include IDcard/IDcard_case4/case4_predicates.ejs %> ],
+                                    "responses": [ <% include IDcard/IDcard_case4/case4_response.ejs %> ]
+                            },
+                            {
+                                    "predicates": [ <% include IDcard/IDcard_case5/case5_predicates.ejs %> ],
+                                    "responses": [ <% include IDcard/IDcard_case5/case5_response.ejs %> ]
+                            },
+                            {
+                                    "predicates": [ <% include IDcard/IDcard_case6/case6_predicates.ejs %> ],
+                                    "responses": [ <% include IDcard/IDcard_case6/case6_response.ejs %> ]
+                            },
+                            {
+                                    "responses": [ <% include proxy.ejs %> ]
+                            }
+                    ]
+            }
+    ]
+}
